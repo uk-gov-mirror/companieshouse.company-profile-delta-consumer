@@ -37,6 +37,8 @@
         <avro.version>1.12.1</avro.version>
         <!-- Source: https://mvnrepository.com/artifact/org.apache.tomcat/tomcat -->
         <tomcat.version>11.0.25</tomcat.version>
+        <!-- Source: https://mvnrepository.com/artifact/at.yawk.lz4/lz4-java -->
+        <lz4-java.version>1.11.3</lz4-java.version>
         <!-- Source: https://mvnrepository.com/artifact/org.mockito/mockito-core -->
         <mockito-core.version>5.23.0</mockito-core.version>
         <!-- Source: https://mvnrepository.com/artifact/io.cucumber/cucumber-java -->
@@ -113,6 +115,19 @@
                 <artifactId>tomcat-embed-websocket</artifactId>
                 <version>${tomcat.version}</version>
                 <scope>compile</scope>
+            </dependency>
+            <!-- END CVE           -->
+
+            <!-- CVE-2026-59949 (+ GHSA-6cx8-rjf8-pr8g, GHSA-4v53-57pg-c464):
+                 lz4-java is pulled in transitively by kafka-clients (via kafka-models).
+                 kafka-clients 4.2.1 ships 1.10.1 and even 4.3.1 only ships 1.10.2,
+                 so the fix must be forced here. -->
+            <!-- Source: https://mvnrepository.com/artifact/at.yawk.lz4/lz4-java -->
+            <dependency>
+                <groupId>at.yawk.lz4</groupId>
+                <artifactId>lz4-java</artifactId>
+                <version>${lz4-java.version}</version>
+                <scope>runtime</scope>
             </dependency>
             <!-- END CVE           -->
 
